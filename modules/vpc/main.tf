@@ -44,15 +44,13 @@ resource "aws_internet_gateway" "gw" {
 
 resource "aws_eip" "nat" {
   domain = "vpc"  
-  
   tags = merge(local.common_tages)
-  
   depends_on = [aws_internet_gateway.gw]
 }
 
 resource "aws_nat_gateway" "nat" {
   allocation_id = aws_eip.nat.id
-  subnet_id     = aws_subnet.private.id
+  subnet_id     = aws_subnet.public.id
 
   tags = merge(local.common_tages)
   depends_on = [aws_internet_gateway.gw]
@@ -68,6 +66,6 @@ resource "aws_route_table" "public" {
 
 resource "aws_route_table_association" "public_assoc" {
   count          = var.public_subnet_count
-  subnet_id      = aws_subnet.public[count.index].id
+  subnet_id      = aws_subnet.public.id
   route_table_id = aws_route_table.public.id
 }

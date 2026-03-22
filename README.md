@@ -1,4 +1,7 @@
 # AWS Production VPC Terraform Module
+## Architecture Diagram
+
+![AWS Architecture](diagrams/architecture.png)
 
 This repository contains a Terraform configuration to provision a standard, highly-available AWS networking environment. It is designed for production use-cases where private resources need internet access through a controlled gateway.
 
